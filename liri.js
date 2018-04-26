@@ -5,6 +5,7 @@ var Twitter = require('twitter');
 var Spotify = require('node-spotify-api');
 var request = require('request');
 var fs = require('fs');
+var omdb = require('omdb');
 
 // get twitter and spotify API key info
 var keys = require('./keys.js');
@@ -44,7 +45,7 @@ function twitter() {
 
     for (var i = 0; i < 9; i++) {
       if (!error) {
-        console.log( `Tweet: ${tweets[i].text}\n  Created: ${tweets[i].created_at}\n` );
+        console.log( `Tweet: ${tweets[i].text}\nCreated: ${tweets[i].created_at}\n` );
       } else {
         console.log(error);
       }
@@ -58,6 +59,11 @@ function twitter() {
 function spotify(input) {
   // load spotify's API keys
   var spotify = new Spotify(keys.spotify);
+
+  // if no "input" arguement specified, default to The Sign by Ace of Base
+  if (!input) {
+    input = 'The Sign, Ace of Base';
+  }
 
   spotify.search({ type: 'track', query: input, limit: 1 }, function (err, data) {
     if (err) {
@@ -73,6 +79,63 @@ function spotify(input) {
   });
 }
 
-// function movie(input) {
+// OBDB FUNCTIONt
+// ===============================================================================
+// function allowMovieSpaces() {
+//   var nodeArgs = process.argv;
 
+//   // Create an empty variable for holding the movie name
+//   var input = "";
+
+//   // Loop through all the words in the node argument
+//   // And do a little for-loop magic to handle the inclusion of "+"s
+//   for (var i = 2; i < nodeArgs.length; i++) {
+
+//     if (i > 2 && i < nodeArgs.length) {
+
+//       input = input + "+" + nodeArgs[i];
+
+//     }
+
+//     else {
+
+//       input += nodeArgs[i];
+
+//     }
+//   }
+//   return input;
 // }
+
+function movie(input) { // ALSO allow movies with spaces!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+  // allowMovieSpaces();
+  
+  var queryURL = `http://www.omdbapi.com/?t=${input}&y=&plot=short&apikey=trilogy`
+
+  request(queryURL, function (error, response, body) {
+    console.log(queryURL)
+
+    if (!input) {
+      input = 'Mr. Nobody';
+    }
+    
+    // If the request is successful
+    if (!error && response.statusCode === 200) {
+
+      console.log(
+        `
+        ============================================================================
+        Title:                         ${JSON.parse(body).Title}
+        Release Year:                  ${JSON.parse(body).Year}
+        IMDB Rating:                   ${JSON.parse(body).imdbRating}
+        Rotten Tomatoes Rating:        ${JSON.parse(body).Ratings[1].Value}
+        Production Country(s):         ${JSON.parse(body).Country}
+        Language:                      ${JSON.parse(body).Language}
+        Plot:                          ${JSON.parse(body).Plot}
+        Actors:                        ${JSON.parse(body).Actors}
+        ============================================================================
+        `
+      );
+    }
+  });
+}
