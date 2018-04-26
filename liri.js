@@ -81,42 +81,58 @@ function spotify(input) {
 
 // OBDB FUNCTIONt
 // ===============================================================================
-// function allowMovieSpaces() {
-//   var nodeArgs = process.argv;
+  var nodeArgs = process.argv;
 
-//   // Create an empty variable for holding the movie name
-//   var input = "";
+  // Create an empty variable for holding the movie name
+  var input = "";
 
-//   // Loop through all the words in the node argument
-//   // And do a little for-loop magic to handle the inclusion of "+"s
-//   for (var i = 2; i < nodeArgs.length; i++) {
+  // Loop through all the words in the node argument
+  // And do a little for-loop magic to handle the inclusion of "+"s
+  for (var i = 3; i < nodeArgs.length; i++) {
 
-//     if (i > 2 && i < nodeArgs.length) {
+    if (i > 3 && i < nodeArgs.length) {
 
-//       input = input + "+" + nodeArgs[i];
+      input = input + "+" + nodeArgs[i];
 
-//     }
+    }
 
-//     else {
+    else {
 
-//       input += nodeArgs[i];
+      input += nodeArgs[i];
 
-//     }
-//   }
-//   return input;
-// }
+    }
+  }
 
-function movie(input) { // ALSO allow movies with spaces!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+function movie(input) { 
 
-  // allowMovieSpaces();
+    var nodeArgs = process.argv;
+
+    // Create an empty variable for holding the movie name
+    var input = "";
+    // Loop through all the words in the node argument
+    // And do a little for-loop magic to handle the inclusion of "+"s
+    for (var i = 3; i < nodeArgs.length; i++) {
+
+      if (i > 3 && i < nodeArgs.length) {
+
+        input = input + "+" + nodeArgs[i];
+
+      }
+
+      else {
+
+        input += nodeArgs[i];
+
+      }
+    }
   
   var queryURL = `http://www.omdbapi.com/?t=${input}&y=&plot=short&apikey=trilogy`
 
   request(queryURL, function (error, response, body) {
-    console.log(queryURL)
+console.log(queryURL);
 
     if (!input) {
-      input = 'Mr. Nobody';
+      input = 'Mr Nobody';
     }
     
     // If the request is successful
@@ -124,7 +140,7 @@ function movie(input) { // ALSO allow movies with spaces!!!!!!!!!!!!!!!!!!!!!!!!
 
       console.log(
         `
-        ============================================================================
+        =================================================================================
         Title:                         ${JSON.parse(body).Title}
         Release Year:                  ${JSON.parse(body).Year}
         IMDB Rating:                   ${JSON.parse(body).imdbRating}
@@ -133,7 +149,7 @@ function movie(input) { // ALSO allow movies with spaces!!!!!!!!!!!!!!!!!!!!!!!!
         Language:                      ${JSON.parse(body).Language}
         Plot:                          ${JSON.parse(body).Plot}
         Actors:                        ${JSON.parse(body).Actors}
-        ============================================================================
+        =================================================================================
         `
       );
     }
