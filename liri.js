@@ -95,8 +95,6 @@ Song Preview:  ${songInfo.preview_url}
 
 // OMDB FUNCTION
 // ===============================================================================
-
-
 function movie(input) {
 
   var nodeArgs = process.argv;
@@ -150,14 +148,25 @@ Actors:                ${json.Actors}
 
 }
 
+
 function doIt() {
   fs.readFile("random.txt", "utf8", function(error, data) {
 
     if (error) {
-      console.log(error)
+      console.log(error);
     }
-
 // TODO: parse format of text in random.txt so it will be accepted as a command/input pair and allow for using other commands as well
 
-  })
+    var randInstructions = process.argv[2];
+
+    dataArr = data.split(',');
+
+    console.log(dataArr);
+
+    var command = dataArr[0];
+    var input = dataArr[1];
+
+    console.log(input);
+
+  });
 }
