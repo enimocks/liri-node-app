@@ -92,7 +92,7 @@ Song Preview:  ${songInfo.preview_url}
 
 
 function movie(input) {
-  
+
   var nodeArgs = process.argv;
 
   // Create an empty variable for holding the movie name
@@ -109,15 +109,15 @@ function movie(input) {
       input += nodeArgs[i];
     }
   }
+
+  if (input === '') {
+    input = 'Mr. Nobody';
+  }
   
   var queryURL = `http://www.omdbapi.com/?t=${input}&y=&plot=short&apikey=trilogy`
 
   request(queryURL, function (error, response, body) {
     console.log(queryURL)
-
-    if (!input) {
-      input = 'Mr. Nobody';
-    }
     
     // If the request is successful
     if (!error && response.statusCode === 200) {
