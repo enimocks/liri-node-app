@@ -88,7 +88,12 @@ Song Preview:  ${songInfo.preview_url}
 // ===============================================================================
 // ********************************************************************************
 // ********************************************************************************
-  var nodeArgs = process.argv; // questions about movies with spaces start here
+// How do I get Mr. Nobody (the default option) to show up????? *******************
+
+
+function movie(input) {
+  
+  var nodeArgs = process.argv;
 
   // Create an empty variable for holding the movie name
   var input = "";
@@ -104,8 +109,6 @@ Song Preview:  ${songInfo.preview_url}
       input += nodeArgs[i];
     }
   }
-
-function movie(input) {
   
   var queryURL = `http://www.omdbapi.com/?t=${input}&y=&plot=short&apikey=trilogy`
 
