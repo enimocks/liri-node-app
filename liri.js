@@ -37,7 +37,8 @@ function twitter() {
   // load twitter's API keys
   var client = new Twitter(keys.twitter);
 
-  var params = { screen_name: 'liri_ned', count: 20 };
+  // Change the value of 'screen_name' to any Twitter username you want (w/o the @ in front!)
+  var params = { screen_name: 'liri_ned', count: 20 }; // up to 20 Tweets (if I had that many in my account)
 
   // Access Twitter API
   client.get('statuses/user_timeline', params, function (error, tweets, response) {
@@ -45,7 +46,11 @@ function twitter() {
     // Get i Tweets from the screen_name variable
     for (var i = 0; i < 9; i++) {
       if (!error) {
-        console.log( `Tweet: ${tweets[i].text}\nCreated: ${tweets[i].created_at}\n` );
+        console.log(
+`
+Tweet: ${tweets[i].text}
+---------------------------------------------------
+Created: ${tweets[i].created_at}\n` );
       } else {
         console.log(error);
       }
@@ -146,5 +151,13 @@ Actors:                ${json.Actors}
 }
 
 function doIt() {
-  
+  fs.readFile("random.txt", "utf8", function(error, data) {
+
+    if (error) {
+      console.log(error)
+    }
+
+// TODO: parse format of text in random.txt so it will be accepted as a command/input pair and allow for using other commands as well
+
+  })
 }
