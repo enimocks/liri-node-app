@@ -1,6 +1,5 @@
 // required npm packages
 var dotenv = require('dotenv').config();
-
 var Twitter = require('twitter');
 var Spotify = require('node-spotify-api');
 var request = require('request');
@@ -40,8 +39,10 @@ function twitter() {
 
   var params = { screen_name: 'liri_ned', count: 20 };
 
+  // Access Twitter API
   client.get('statuses/user_timeline', params, function (error, tweets, response) {
 
+    // Get i Tweets from the screen_name variable
     for (var i = 0; i < 9; i++) {
       if (!error) {
         console.log( `Tweet: ${tweets[i].text}\nCreated: ${tweets[i].created_at}\n` );
@@ -51,6 +52,7 @@ function twitter() {
     }
 
   });
+
 }
 
 // SPOTIFY FUNCTION
@@ -64,13 +66,14 @@ function spotify(input) {
     input = 'The Sign, Ace of Base';
   }
 
+  // Query Spotify API - 1 time
   spotify.search({ type: 'track', query: input, limit: 1 }, function (err, data) {
     if (err) {
       return console.log('Error occurred: ' + err);
     }
-
+    // create songInfo variable to shorten path to information through data object
     var songInfo = data.tracks.items[0];
-
+    // ES6 templating for logging 4 desired song details to console
     console.log(
 `
 =================================================
@@ -82,13 +85,11 @@ Song Preview:  ${songInfo.preview_url}
 `
     );
   });
+
 }
 
 // OMDB FUNCTION
 // ===============================================================================
-// ********************************************************************************
-// ********************************************************************************
-// How do I get Mr. Nobody (the default option) to show up????? *******************
 
 
 function movie(input) {
@@ -138,8 +139,10 @@ Actors:                ${json.Actors}
 ============================================================================
 `
       );
+      
     }
   });
+
 }
 
 function doIt() {
