@@ -134,7 +134,7 @@ function movie(input) {
 ============================================================================
 Release Year:          ${json.Year}
 Title:                 ${json.Title}
-IMDB Rating:           ${json.imdbRsating}
+IMDB Rating:           ${json.imdbRating}
 RT Rating:             ${json.Ratings[1].Value}
 Production Country:    ${json.Country}
 Language:              ${json.Language}
