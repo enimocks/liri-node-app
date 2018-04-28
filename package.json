@@ -1,7 +1,7 @@
 {
   "name": "liri-node-app",
   "version": "1.0.0",
-  "description": "",
+  "description": "Language interpreter that takes in 1 of 4 arguments - 3 of them with specifiers for those arguments - and outputs select data by parsing through the JSON response data",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -11,7 +11,7 @@
     "url": "git+https://github.com/enimocks/liri-node-app.git"
   },
   "keywords": [],
-  "author": "",
+  "author": "Edward (Ned) Nimocks",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/enimocks/liri-node-app/issues"
