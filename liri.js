@@ -89,6 +89,7 @@ Song Preview:  ${songInfo.preview_url}
 =================================================
 `
     );
+  appendToLog(songInfo);
   });
 
 }
@@ -100,7 +101,7 @@ function movie(input) {
   var nodeArgs = process.argv;
 
   // Create an empty variable for holding the movie name
-  // var input = "";
+  var input = "";
 
   // Loop through all the words in the node argument
   // And do a little for-loop magic to handle the inclusion of "+"s
@@ -117,12 +118,12 @@ function movie(input) {
   if (input === '') {
     input = 'Mr. Nobody';
   }
-  
+
   var queryURL = `http://www.omdbapi.com/?t=${input}&y=&plot=short&apikey=trilogy`
 
   request(queryURL, function (error, response, body) {
     console.log(queryURL)
-    
+    console.log(body)
     // If the request is successful
     if (!error && response.statusCode === 200) {
 
@@ -144,6 +145,7 @@ Actors:                ${json.Actors}
       );
       
     }
+  appendToLog(body);
   });
 
 }
@@ -178,7 +180,7 @@ function doIt() {
       movie(input);
       break;
     }
-
+  appendToLog(data);
   });
 
 }
