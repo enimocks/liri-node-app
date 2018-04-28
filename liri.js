@@ -55,7 +55,7 @@ Created: ${tweets[i].created_at}\n` );
         console.log(error);
       }
     }
-
+    appendToLog(tweets);
   });
 
 }
@@ -74,7 +74,7 @@ function spotify(input) {
   // Query Spotify API - 1 time
   spotify.search({ type: 'track', query: input, limit: 1 }, function (err, data) {
     if (err) {
-      return console.log('Error occurred: ' + err);
+      console.log('Error occurred: ' + err);
     }
     // create songInfo variable to shorten path to information through data object
     var songInfo = data.tracks.items[0];
@@ -183,24 +183,24 @@ function doIt() {
 
 }
 
-// function appendToLog() {
-// // We then store the textfile filename given to us from the command line
-// var textFile = "random.txt"
+function appendToLog(data) {
+// We then store the textfile filename given to us from the command line
+var textFile = "log.txt"
 
-// // We then append the contents "Hello Kitty" into the file
-// // If the file didn't exist then it gets created on the fly.
-// fs.appendFile(textFile, "Hello Kitty", function (err) {
+// We then append the contents "Hello Kitty" into the file
+// If the file didn't exist then it gets created on the fly.
+fs.appendFile(textFile, JSON.stringify(data, null, 2), function (err) {
 
-//   // If an error was experienced we say it.
-//   if (err) {
-//     console.log(err);
-//   }
+  // If an error was experienced we say it.
+  if (err) {
+    console.log(err);
+  }
 
-//   // If no error is experienced, we'll log the phrase "Content Added" to our node console.
-//   else {
-//     console.log("Content Added!");
-//   }
+  // If no error is experienced, we'll log the phrase "Content Added" to our node console.
+  else {
+    console.log("Content Added!");
+  }
 
-// });
+});
 
-// }
+}
