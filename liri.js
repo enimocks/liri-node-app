@@ -100,14 +100,14 @@ function movie(input) {
   var nodeArgs = process.argv;
 
   // Create an empty variable for holding the movie name
-  var input = "";
+  // var input = "";
 
   // Loop through all the words in the node argument
   // And do a little for-loop magic to handle the inclusion of "+"s
   for (var i = 3; i < nodeArgs.length; i++) {
 
     if (i > 3 && i < nodeArgs.length) {
-      input = input + "+" + nodeArgs[i];
+      input = input + '+' + nodeArgs[i];
     }
     else {
       input += nodeArgs[i];
@@ -133,7 +133,7 @@ function movie(input) {
 ============================================================================
 Release Year:          ${json.Year}
 Title:                 ${json.Title}
-IMDB Rating:           ${json.imdbRating}
+IMDB Rating:           ${json.imdbRsating}
 RT Rating:             ${json.Ratings[1].Value}
 Production Country:    ${json.Country}
 Language:              ${json.Language}
@@ -148,25 +148,59 @@ Actors:                ${json.Actors}
 
 }
 
-
+// DO-WHAT-IT-SAYS function - read contents of random.txt and pass them into the command line as commands/input pairs
+// ===============================================================================
 function doIt() {
-  fs.readFile("random.txt", "utf8", function(error, data) {
+  fs.readFile('random.txt', 'utf8', function(error, data) {
 
     if (error) {
       console.log(error);
     }
 // TODO: parse format of text in random.txt so it will be accepted as a command/input pair and allow for using other commands as well
-
-    var randInstructions = process.argv[2];
-
+    console.log(data)
+    
     dataArr = data.split(',');
 
-    console.log(dataArr);
+    console.log(dataArr[0]);
 
-    var command = dataArr[0];
-    var input = dataArr[1];
+    input = dataArr[1];
 
-    console.log(input);
+    switch(dataArr[0]) { // get command in random.txt and compare with commands in switch cases
+      case 'my-tweets':
+      twitter();
+      break;
+
+      case 'spotify-this-song':
+      spotify(input);
+      break;
+
+      case 'movie-this':
+      movie(input);
+      break;
+    }
 
   });
+
 }
+
+// function appendToLog() {
+// // We then store the textfile filename given to us from the command line
+// var textFile = "random.txt"
+
+// // We then append the contents "Hello Kitty" into the file
+// // If the file didn't exist then it gets created on the fly.
+// fs.appendFile(textFile, "Hello Kitty", function (err) {
+
+//   // If an error was experienced we say it.
+//   if (err) {
+//     console.log(err);
+//   }
+
+//   // If no error is experienced, we'll log the phrase "Content Added" to our node console.
+//   else {
+//     console.log("Content Added!");
+//   }
+
+// });
+
+// }
