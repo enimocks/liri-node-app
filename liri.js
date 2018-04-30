@@ -104,11 +104,10 @@ function movie(input) {
     input = 'Mr. Nobody';
   }
 
-  var queryURL = `http://www.omdbapi.com/?t=${input}&y=&plot=short&apikey=trilogy`
+  var queryURL = `http://www.omdbapi.com/?t=${input}&plot=short&apikey=trilogy`
 
   request(queryURL, function (error, response, body) {
     console.log(queryURL)
-    console.log(body)
     // If the request is successful
     if (!error && response.statusCode === 200) {
 
@@ -171,19 +170,17 @@ function doIt() {
 }
 
 function appendToLog(data) {
-// We then store the textfile filename given to us from the command line
+
 var textFile = "log.txt"
 
-// We then append the contents "Hello Kitty" into the file
-// If the file didn't exist then it gets created on the fly.
 fs.appendFile(textFile, JSON.stringify(data, null, 2), function (err) {
 
-  // If an error was experienced we say it.
+  // If error, console log it.
   if (err) {
     console.log(err);
   }
 
-  // If no error is experienced, we'll log the phrase "Content Added" to our node console.
+  // If no error, log "Content Added" to the node console.
   else {
     console.log("Content Added!");
   }
