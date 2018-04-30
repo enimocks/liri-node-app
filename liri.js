@@ -98,22 +98,7 @@ Song Preview:  ${songInfo.preview_url}
 // ===============================================================================
 function movie(input) {
 
-  var nodeArgs = process.argv;
-
-  // Create an empty variable for holding the movie name
-  var input = "";
-
-  // Loop through all the words in the node argument
-  // And do a little for-loop magic to handle the inclusion of "+"s
-  for (var i = 3; i < nodeArgs.length; i++) {
-
-    if (i > 3 && i < nodeArgs.length) {
-      input = input + '+' + nodeArgs[i];
-    }
-    else {
-      input += nodeArgs[i];
-    }
-  }
+  input = process.argv[3].split(' ').join('+');
 
   if (input === '') {
     input = 'Mr. Nobody';
